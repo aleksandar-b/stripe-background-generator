@@ -1,6 +1,7 @@
 import { observable, action, computed } from 'mobx';
 import { flatten, repeat } from 'ramda';
 import Grid from '../utils/Grid';
+import { coinFlip } from '../utils/Helpers';
 
 class Store {
   @observable
@@ -84,8 +85,9 @@ class Store {
   get randomGeneratedStripes() {
     const grid = new Grid(this.columns, this.rows, 760, 1200);
     const { stripeStyle, stripeSize } = this;
+
     return flatten(repeat(this.palette, Math.floor(this.rows / 2))).map(({ value }) => {
-      return { position: grid.getRandomPosition(), value, stripeStyle, stripeSize };
+      return { position: grid.getRandomPosition(), value, stripeStyle, stripeSize, fill: coinFlip() ? 'none' : value };
     });
   }
 

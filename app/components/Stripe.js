@@ -1,7 +1,6 @@
 import React from 'react';
-import { coinFlip } from '../utils/Helpers';
 
-const getStyles = ({ height, width, color, top, left, r, forceWidth, stripeStyle }) => {
+const getStyles = ({ height, width, color, top, left, r, forceWidth, stripeStyle, fill }) => {
   return {
     x: `${left}%`,
     y: `${top}%`,
@@ -11,7 +10,7 @@ const getStyles = ({ height, width, color, top, left, r, forceWidth, stripeStyle
     opacity: '1',
     stroke: color,
     fill: stripeStyle === 'fill' ? color : 'none',
-    ...(stripeStyle === 'mixed' && { fill: coinFlip() ? 'none' : color }),
+    ...(stripeStyle === 'mixed' && { fill }),
     rx: r,
     ry: r,
   };

@@ -17,8 +17,17 @@ const SvgBackground = ({ store: { linearGradientBackground, randomGeneratedStrip
   return (
     <svg style={getStyles(linearGradientBackground)} xmlns="http://www.w3.org/2000/svg" version="1.1">
       <g>
-        {randomGeneratedStripes.map(({ value, position, stripeStyle, stripeSize }) => {
-          return <Stripe color={value} key={Math.random()} {...position} stripeStyle={stripeStyle} stripeSize={stripeSize} />;
+        {randomGeneratedStripes.map(({ value, position, stripeStyle, stripeSize, fill }) => {
+          return (
+            <Stripe
+              color={value}
+              key={Math.random()}
+              {...position}
+              stripeStyle={stripeStyle}
+              stripeSize={stripeSize}
+              fill={fill}
+            />
+          );
         })}
       </g>
     </svg>
