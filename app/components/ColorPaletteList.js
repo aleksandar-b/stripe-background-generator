@@ -21,10 +21,10 @@ const styles = theme => ({
   },
 });
 
-const ColorPaletteList = (props) => {
+const ColorPaletteList = props => {
   const { classes, palette, backgroundPicker } = props;
 
-  const handleDeleteColor = (c) => {
+  const handleDeleteColor = c => {
     const { store } = props;
     if (backgroundPicker) {
       store.deleteColorFromPaletteBackground(c);
@@ -38,10 +38,7 @@ const ColorPaletteList = (props) => {
         {palette.map(color => (
           <ListItem dense button className={classes.listItem} key={color.id}>
             <ListItemText>
-              <SketchPicker
-                backgroundPicker={backgroundPicker}
-                color={color}
-              />
+              <SketchPicker backgroundPicker={backgroundPicker} color={color} />
             </ListItemText>
             <ListItemSecondaryAction>
               <IconButton aria-label="Delete" onClick={() => handleDeleteColor(color)}>

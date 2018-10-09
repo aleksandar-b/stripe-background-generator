@@ -1,12 +1,15 @@
 import React from 'react';
 
-const Ruler = (props) => {
+const Ruler = props => {
   return (
     <svg
       width="30px"
       height="100%"
       style={{
-        opacity: 0.6, position: 'absolute', left: 0, ...props,
+        opacity: 0.6,
+        position: 'absolute',
+        left: 0,
+        ...props,
       }}
     >
       <defs>

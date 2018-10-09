@@ -1,9 +1,7 @@
 import React from 'react';
 import { coinFlip } from '../utils/Helpers';
 
-const getStyles = ({
-  height, width, color, top, left, r, forceWidth, stripeStyle,
-}) => {
+const getStyles = ({ height, width, color, top, left, r, forceWidth, stripeStyle }) => {
   return {
     x: `${left}%`,
     y: `${top}%`,
@@ -19,7 +17,7 @@ const getStyles = ({
   };
 };
 
-const Stripe = (props) => {
+const Stripe = props => {
   return <rect {...getStyles(props)} />;
 };
 

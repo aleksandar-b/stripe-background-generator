@@ -7,15 +7,12 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const config = {
   stats: {
-    maxModules: 0
+    maxModules: 0,
   },
   mode: 'production',
   devtool: 'cheap-module-source-map',
 
-  entry: [
-    './main.js',
-    './assets/scss/main.scss',
-  ],
+  entry: ['./main.js', './assets/scss/main.scss'],
 
   context: resolve(__dirname, 'app'),
 
@@ -58,9 +55,9 @@ const config = {
       new UglifyJsPlugin({
         cache: true,
         parallel: true,
-        sourceMap: true
-      })
-    ]
+        sourceMap: true,
+      }),
+    ],
   },
 
   resolve: {
@@ -79,11 +76,8 @@ const config = {
         exclude: /node_modules/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: [
-            'css-loader',
-            { loader: 'sass-loader', query: { sourceMap: false } },
-          ],
-          publicPath: '../'
+          use: ['css-loader', { loader: 'sass-loader', query: { sourceMap: false } }],
+          publicPath: '../',
         }),
       },
       {
@@ -95,8 +89,8 @@ const config = {
               limit: 8192,
               mimetype: 'image/png',
               name: 'images/[name].[ext]',
-            }
-          }
+            },
+          },
         ],
       },
       {
@@ -105,9 +99,9 @@ const config = {
           {
             loader: 'file-loader',
             options: {
-              name: 'fonts/[name].[ext]'
-            }
-          }
+              name: 'fonts/[name].[ext]',
+            },
+          },
         ],
       },
       {
@@ -119,8 +113,8 @@ const config = {
               limit: 8192,
               mimetype: 'application/font-woff',
               name: 'fonts/[name].[ext]',
-            }
-          }
+            },
+          },
         ],
       },
       {
@@ -132,8 +126,8 @@ const config = {
               limit: 8192,
               mimetype: 'application/octet-stream',
               name: 'fonts/[name].[ext]',
-            }
-          }
+            },
+          },
         ],
       },
       {
@@ -145,11 +139,11 @@ const config = {
               limit: 8192,
               mimetype: 'image/svg+xml',
               name: 'images/[name].[ext]',
-            }
-          }
+            },
+          },
         ],
       },
-    ]
+    ],
   },
 };
 

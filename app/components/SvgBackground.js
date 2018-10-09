@@ -2,7 +2,7 @@ import React from 'react';
 import { observer, inject, PropTypes } from 'mobx-react';
 import Stripe from './Stripe';
 
-const getStyles = (linearGradientBackground) => {
+const getStyles = linearGradientBackground => {
   return {
     overflow: 'hidden',
     width: '100%',
@@ -13,24 +13,12 @@ const getStyles = (linearGradientBackground) => {
   };
 };
 
-const SvgBackground = ({
-  store: {
-    linearGradientBackground, randomGeneratedStripes, stripeSize, stripeStyle,
-  },
-}) => {
+const SvgBackground = ({ store: { linearGradientBackground, randomGeneratedStripes, stripeSize, stripeStyle } }) => {
   return (
     <svg style={getStyles(linearGradientBackground)} xmlns="http://www.w3.org/2000/svg" version="1.1">
       <g>
         {randomGeneratedStripes.map(({ value, position }) => {
-          return (
-            <Stripe
-              color={value}
-              key={Math.random()}
-              stripeStyle={stripeStyle}
-              forceWidth={stripeSize}
-              {...position}
-            />
-          );
+          return <Stripe color={value} key={Math.random()} stripeStyle={stripeStyle} forceWidth={stripeSize} {...position} />;
         })}
       </g>
     </svg>

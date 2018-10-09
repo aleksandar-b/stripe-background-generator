@@ -1,7 +1,7 @@
 import { random } from './Helpers';
 
 class Grid {
-  constructor (columns, rows, gridHeight, gridWidth) {
+  constructor(columns, rows, gridHeight, gridWidth) {
     this.columns = columns;
     this.rows = rows;
     this.gridHeight = gridHeight;
@@ -18,15 +18,15 @@ class Grid {
     return this.gridWidth / this.columns;
   }
 
-  static random (min, max) {
+  static random(min, max) {
     return random(min, max);
   }
 
-  static toPercent (rel, abs) {
+  static toPercent(rel, abs) {
     return (rel * 100) / abs;
   }
 
-  getRandomPosition () {
+  getRandomPosition() {
     const top = Grid.random(0, this.rows - 1) * this.getCellHeight();
     const left = Grid.random(0, this.columns - 1) * this.getCellWidth();
     return {
