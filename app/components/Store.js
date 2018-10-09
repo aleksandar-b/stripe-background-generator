@@ -83,8 +83,9 @@ class Store {
   @computed
   get randomGeneratedStripes() {
     const grid = new Grid(this.columns, this.rows, 760, 1200);
+    const { stripeStyle, stripeSize } = this;
     return flatten(repeat(this.palette, Math.floor(this.rows / 2))).map(({ value }) => {
-      return { position: grid.getRandomPosition(), value };
+      return { position: grid.getRandomPosition(), value, stripeStyle, stripeSize };
     });
   }
 

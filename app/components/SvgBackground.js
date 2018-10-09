@@ -13,12 +13,12 @@ const getStyles = linearGradientBackground => {
   };
 };
 
-const SvgBackground = ({ store: { linearGradientBackground, randomGeneratedStripes, stripeSize, stripeStyle } }) => {
+const SvgBackground = ({ store: { linearGradientBackground, randomGeneratedStripes } }) => {
   return (
     <svg style={getStyles(linearGradientBackground)} xmlns="http://www.w3.org/2000/svg" version="1.1">
       <g>
-        {randomGeneratedStripes.map(({ value, position }) => {
-          return <Stripe color={value} key={Math.random()} stripeStyle={stripeStyle} forceWidth={stripeSize} {...position} />;
+        {randomGeneratedStripes.map(({ value, position, stripeStyle, stripeSize }) => {
+          return <Stripe color={value} key={Math.random()} {...position} stripeStyle={stripeStyle} stripeSize={stripeSize} />;
         })}
       </g>
     </svg>
