@@ -11,7 +11,7 @@ import TabCode from './TabCode';
 
 function TabContainer({ children, dir }) {
   return (
-    <Typography component="div" dir={dir} style={{ padding: 8 * 3 }}>
+    <Typography component="div" dir={dir} style={{ padding: 8 * 3, maxHeight: 500 }}>
       {children}
     </Typography>
   );
@@ -46,8 +46,6 @@ class TabsControl extends React.Component {
     this.setState({ value: index });
   };
 
-  setOptions = () => {};
-
   render() {
     const { classes, theme } = this.props;
     const { value } = this.state;
@@ -63,15 +61,11 @@ class TabsControl extends React.Component {
         <SwipeableViews
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
           index={value}
-          style={{ maxHeight: 600 }}
+          containerStyle={{ maxHeight: 600, minHeight: 600 }}
           onChangeIndex={this.handleChangeIndex}
         >
-          <TabContainer dir={theme.direction}>
-            <TabDesign setOptions={this.setOptions} />
-          </TabContainer>
-          <TabContainer dir={theme.direction}>
-            <TabCode />
-          </TabContainer>
+          <TabContainer dir={theme.direction}>{value === 0 && <TabDesign />}</TabContainer>
+          <TabContainer dir={theme.direction}>{value === 1 && <TabCode />}</TabContainer>
         </SwipeableViews>
       </div>
     );

@@ -14,9 +14,7 @@ const styles = {
   },
 };
 
-const Hero = ({
-  classes, // gradients, palette, ...rest
-}) => {
+const Hero = ({ classes }) => {
   return (
     <main className={classes.content}>
       <SvgBackground />

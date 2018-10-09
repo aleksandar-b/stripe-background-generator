@@ -1,7 +1,7 @@
 import { observable, action, computed } from 'mobx';
 import { flatten, repeat } from 'ramda';
 import Grid from '../utils/Grid';
-import { coinFlip } from '../utils/Helpers';
+import { coinFlip, random } from '../utils/Helpers';
 
 class Store {
   @observable
@@ -87,7 +87,14 @@ class Store {
     const { stripeStyle, stripeSize } = this;
 
     return flatten(repeat(this.palette, Math.floor(this.rows / 2))).map(({ value }) => {
-      return { position: grid.getRandomPosition(), value, stripeStyle, stripeSize, fill: coinFlip() ? 'none' : value };
+      return {
+        position: grid.getRandomPosition(),
+        value,
+        stripeStyle,
+        stripeSize,
+        fill: coinFlip() ? 'none' : value,
+        forceWidth: stripeSize === 4 ? random(0, 3) : stripeSize,
+      };
     });
   }
 

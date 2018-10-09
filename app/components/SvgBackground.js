@@ -17,7 +17,7 @@ const SvgBackground = ({ store: { linearGradientBackground, randomGeneratedStrip
   return (
     <svg style={getStyles(linearGradientBackground)} xmlns="http://www.w3.org/2000/svg" version="1.1">
       <g>
-        {randomGeneratedStripes.map(({ value, position, stripeStyle, stripeSize, fill }) => {
+        {randomGeneratedStripes.map(({ value, position, stripeStyle, stripeSize, fill, forceWidth }) => {
           return (
             <Stripe
               color={value}
@@ -26,6 +26,7 @@ const SvgBackground = ({ store: { linearGradientBackground, randomGeneratedStrip
               stripeStyle={stripeStyle}
               stripeSize={stripeSize}
               fill={fill}
+              forceWidth={forceWidth}
             />
           );
         })}
