@@ -7,7 +7,7 @@ const getStyles = ({ height, width, color, top, left, r, forceWidth, stripeStyle
     y: `${top}%`,
     width: `${width * forceWidth}%`,
     height: `${height}%`,
-    transform: `translate(0,-${height})`,
+    translate: `0, -${height}%`,
     opacity: '1',
     stroke: color,
     fill: stripeStyle === 'fill' ? color : 'none',
