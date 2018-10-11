@@ -53,7 +53,7 @@ class TabsControl extends React.Component {
     return (
       <div className={classes.root}>
         <AppBar position="static" color="default">
-          <Tabs value={value} onChange={this.handleChange} indicatorColor="primary" textColor="primary" fullWidth>
+          <Tabs value={value} onChange={this.handleChange} indicatorColor="primary" textColor="primary">
             <Tab label="Design" />
             <Tab label="Code" />
           </Tabs>

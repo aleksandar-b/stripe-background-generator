@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import { withStyles } from '@material-ui/core/styles';
+import { inject, observer, PropTypes } from 'mobx-react';
 import TabsControl from './TabsControl';
-import withGradients from './WithGradients';
 
 const styles = theme => ({
   root: {
@@ -31,6 +30,11 @@ class Controls extends Component {
     isShowTabs: false,
   };
 
+  componentDidMount() {
+    const { gradientStore } = this.props;
+    gradientStore.fetchGradients();
+  }
+
   toggleTabs = () => {
     const { isShowTabs } = this.state;
     this.setState({ isShowTabs: !isShowTabs });
@@ -51,6 +55,7 @@ class Controls extends Component {
 }
 
 Controls.propTypes = {
-  classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  classes: PropTypes.objectOrObservableObject.isRequired,
+  gradientStore: PropTypes.objectOrObservableObject.isRequired,
 };
-export default withStyles(styles)(withGradients(Controls));
+export default withStyles(styles)(inject('gradientStore')(observer(Controls)));

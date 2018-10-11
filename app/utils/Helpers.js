@@ -5,3 +5,7 @@ export const coinFlip = () => {
 export const random = (min, max) => {
   return Math.abs(Math.floor(Math.random() * (max - min + 1)) + min);
 };
+
+export const toRgbString = ({ r, g, b, a }) => {
+  return `rgba(${r},${g},${b},${a})`;
+};

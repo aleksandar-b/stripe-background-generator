@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { observer, inject, PropTypes } from 'mobx-react';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem/MenuItem';
+import { Checkboard } from 'react-color/lib/components/common';
+
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton/IconButton';
 import Flex, { FlexItem } from 'styled-flex-component';
 import ColorPaletteList from './ColorPaletteList';
 import { stripeSizes, stripeStyles } from '../utils/Constants';
+import GradientsStore from './GradientsStore';
 
 class TabDesign extends Component {
   state = {
@@ -33,7 +36,7 @@ class TabDesign extends Component {
 
   render() {
     const {
-      store: { rows, columns, stripeSize, stripeStyle, background, palette },
+      store: { rows, columns, stripeSize, stripeStyle, stripeRound, background, palette, stripeAlpha },
     } = this.props;
     const { store } = this.props;
 
@@ -42,6 +45,9 @@ class TabDesign extends Component {
         <Flex column>
           <Flex flex justifyBetween alignCenter>
             <h3>Background</h3>
+            <IconButton onClick={() => GradientsStore.setRandomBackgroundAndPaletteFromGradients()}>
+              <Icon>refresh_icon</Icon>
+            </IconButton>
             <IconButton onClick={() => store.addBackgroundPalette({ id: Math.random(), value: '#000000' })}>
               <Icon>add_icon</Icon>
             </IconButton>
@@ -91,14 +97,14 @@ class TabDesign extends Component {
           </Flex>
         </Flex>
         <Flex column>
-          <h3>Stripe options</h3>
+          <h3>Stripe</h3>
           <Flex justifyBetween contentSpaceAround alignCenter>
             <FlexItem grow={1} style={{ marginRight: 16 }}>
               <TextField
                 fullWidth
                 id="stripe-size"
                 select
-                label="Stripe size"
+                label="Size"
                 value={stripeSize}
                 onChange={this.handleChange('StripeSize')}
                 margin="normal"
@@ -115,7 +121,7 @@ class TabDesign extends Component {
                 fullWidth
                 id="stripe-style"
                 select
-                label="Stripe style"
+                label="Style"
                 value={stripeStyle}
                 onChange={this.handleChange('StripeStyle')}
                 margin="normal"
@@ -126,6 +132,34 @@ class TabDesign extends Component {
                   </MenuItem>
                 ))}
               </TextField>
+            </FlexItem>
+          </Flex>
+        </Flex>
+        <Flex column>
+          <Flex justifyBetween contentSpaceAround alignCenter>
+            <FlexItem grow={1} style={{ marginRight: 16 }}>
+              <TextField
+                fullWidth
+                id="stripe-round"
+                label="Round"
+                type="number"
+                inputProps={{ min: 0, max: 2000 }}
+                value={stripeRound}
+                onChange={this.handleChange('StripeRound')}
+                margin="normal"
+              />
+            </FlexItem>
+            <FlexItem grow={1} style={{ marginLeft: 16 }}>
+              <TextField
+                fullWidth
+                id="stripe-alpha"
+                label="Alpha"
+                type="number"
+                inputProps={{ min: 0, max: 100 }}
+                value={stripeAlpha}
+                onChange={this.handleChange('StripeAlpha')}
+                margin="normal"
+              />
             </FlexItem>
           </Flex>
         </Flex>

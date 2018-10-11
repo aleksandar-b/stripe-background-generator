@@ -5,26 +5,52 @@ import { coinFlip, random } from '../utils/Helpers';
 
 class Store {
   @observable
-  background = [{ value: '#fff', id: Math.random() }];
+  background = [{ value: { r: 240, g: 240, b: 240, a: 1 }, id: Math.random(), standard: 'rgba(245, 245, 245, 1)' }];
 
   @observable
-  stripeSize = 1;
+  palette = [
+    { value: { r: 23, g: 54, b: 1, a: 1 }, id: Math.random(), standard: 'rgba(0, 0, 0, 1)' },
+    { value: { r: 23, g: 54, b: 1, a: 1 }, id: Math.random(), standard: 'rgba(0, 0, 0, 0)' },
+    { value: { r: 23, g: 224, b: 216, a: 1 }, id: Math.random(), standard: '#23B5DC' },
+  ];
 
   @observable
-  stripeStyle = 'fill';
+  currentPaletteName = '';
 
   @observable
-  rows = 8;
+  currentBackgroundName = '';
+
+  @observable
+  stripeSize = 4;
+
+  @observable
+  stripeStyle = 'mixed';
+
+  @observable
+  rows = 17;
 
   @observable
   columns = 8;
 
   @observable
-  palette = [{ value: '#ff9968', id: Math.random() }];
+  stripeRound = 0;
+
+  @observable
+  stripeAlpha = 1;
+
+  @action
+  setPalette(palette) {
+    this.palette = palette;
+  }
 
   @action
   addPalette(color) {
     this.palette.push(color);
+  }
+
+  @action
+  setBackgroundPalette(palettes) {
+    this.background = palettes;
   }
 
   @action
@@ -67,6 +93,16 @@ class Store {
   }
 
   @action
+  handleStripeRound(data) {
+    this.stripeRound = data;
+  }
+
+  @action
+  handleStripeAlpha(data) {
+    this.stripeAlpha = data / 100;
+  }
+
+  @action
   handleRows(data) {
     this.rows = data;
   }
@@ -81,19 +117,26 @@ class Store {
     return this.palette;
   }
 
-  @computed
-  get randomGeneratedStripes() {
-    const grid = new Grid(this.columns, this.rows, 760, 1200);
-    const { stripeStyle, stripeSize } = this;
+  fill(value) {
+    const { stripeStyle } = this;
+    if (stripeStyle === 'fill') {
+      return value;
+    }
+    return stripeStyle === 'outline' ? 'none' : (coinFlip() && 'none') || value;
+  }
 
-    return flatten(repeat(this.palette, Math.floor(this.rows / 2))).map(({ value }) => {
+  @computed
+  get randomGeneratedStripesSvg() {
+    const grid = new Grid(this.columns, this.rows, 760, 1200);
+    const randomPosition = grid.getRandomPosition();
+    const { stripeSize } = this;
+
+    return flatten(repeat(this.palette, Math.floor(this.rows / 2))).map(({ standard }) => {
       return {
         position: grid.getRandomPosition(),
-        value,
-        stripeStyle,
-        stripeSize,
-        fill: coinFlip() ? 'none' : value,
-        forceWidth: stripeSize === 4 ? random(0, 3) : stripeSize,
+        fill: this.fill(standard),
+        stroke: standard,
+        width: stripeSize === 4 ? random(0, 3) * randomPosition.width : randomPosition.width * stripeSize,
       };
     });
   }
@@ -107,10 +150,9 @@ class Store {
   get linearGradientBackground() {
     return `linear-gradient(to right, ${
       this.background.length > 1
-        ? this.background.map(v => v.value).join(',')
-        : `${this.background.get(0).value}, ${this.background.get(0).value}`
+        ? this.background.map(v => v.standard).join(',')
+        : `${this.background.get(0).standard}, ${this.background.get(0).standard}`
     })`;
   }
 }
 export default new Store();
-// Stripe Opacity or RGBA / Stripe numbers / cache generated grid positions / ui gradients random

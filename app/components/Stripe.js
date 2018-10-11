@@ -1,18 +1,18 @@
 import React from 'react';
 
-const getStyles = ({ height, width, color, top, left, r, forceWidth, stripeStyle, fill }) => {
+const getStyles = ({ height, width, top, left, r, stroke, fill, opacity }) => {
   return {
     x: `${left}%`,
     y: `${top}%`,
-    width: `${width * forceWidth}%`,
+    width: `${width}%`,
     height: `${height}%`,
     translate: `0, -${height}%`,
-    opacity: '1',
-    stroke: stripeStyle === 'fill' ? fill : color,
-    fill: stripeStyle === 'fill' ? color : 'none',
-    ...(stripeStyle === 'mixed' && { fill }),
-    rx: r,
-    ry: r,
+    opacity,
+    stroke,
+    strokeWidth: 1.5,
+    fill,
+    rx: r / 2,
+    ry: r / 2,
   };
 };
 
@@ -26,6 +26,7 @@ Stripe.defaultProps = {
   width: 0,
   height: 0,
   opacity: 1,
+  stroke: '#111111',
   color: '#fff',
   r: 0,
   stripeStyle: 'fill',

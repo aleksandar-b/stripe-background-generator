@@ -3,6 +3,7 @@
 import React from 'react';
 import { SketchPicker } from 'react-color';
 import { observer, inject } from 'mobx-react';
+import { toRgbString } from '../utils/Helpers';
 
 class Sketch extends React.Component {
   state = {
@@ -21,15 +22,15 @@ class Sketch extends React.Component {
   handleChange = c => {
     const { store, color, backgroundPicker } = this.props;
     if (backgroundPicker) {
-      store.handleChangeBackgroundColor({ id: color.id, value: c.hex });
+      store.handleChangeBackgroundColor({ id: color.id, value: c.rgb, standard: toRgbString(c.rgb) });
     } else {
-      store.handleChangeColor({ id: color.id, value: c.hex });
+      store.handleChangeColor({ id: color.id, value: c.rgb, standard: toRgbString(c.rgb) });
     }
   };
 
   handleChangeBackgroundColor = c => {
     const { store, color } = this.props;
-    store.handleChangeColor({ id: color.id, value: c.hex });
+    store.handleChangeColor({ id: color.id, value: c.rgb, standard: toRgbString(c.rgb) });
   };
 
   render() {
@@ -41,7 +42,7 @@ class Sketch extends React.Component {
         width: '100%',
         height: '24px',
         borderRadius: '2px',
-        background: color.value,
+        background: color.standard,
       },
       swatch: {
         flexGrow: 1,
@@ -73,7 +74,7 @@ class Sketch extends React.Component {
         {displayColorPicker ? (
           <div style={styles.popover}>
             <div role="presentation" style={styles.cover} onClick={this.handleClose} />
-            <SketchPicker color={color.value} onChangeComplete={this.handleChange} />
+            <SketchPicker color={color.value} onChange={this.handleChange} />
           </div>
         ) : null}
       </div>

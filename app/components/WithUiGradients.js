@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const WithGradients = WrappedComponent =>
+const WithUiGradients = WrappedComponent =>
   class extends Component {
     state = {
       gradients: [],
@@ -21,4 +21,4 @@ const WithGradients = WrappedComponent =>
     }
   };
 
-export default WithGradients;
+export default WithUiGradients;

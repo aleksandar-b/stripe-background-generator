@@ -54,12 +54,13 @@ const ColorPaletteList = props => {
 
 ColorPaletteList.propTypes = {
   classes: PropTypes.objectOrObservableObject.isRequired,
-  palette: PropTypes.arrayOrObservableArray.isRequired,
+  palette: PropTypes.arrayOrObservableArray,
   store: PropTypes.objectOrObservableObject.isRequired,
   backgroundPicker: propTypes.bool,
 };
 ColorPaletteList.defaultProps = {
   backgroundPicker: false,
+  palette: [],
 };
 
 export default withStyles(styles)(inject('store')(observer(ColorPaletteList)));

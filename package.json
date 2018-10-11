@@ -41,9 +41,11 @@
   },
   "dependencies": {
     "@material-ui/core": "^3.1.1",
+    "@material-ui/lab": "^3.0.0-alpha.19",
     "chroma-js": "^1.4.0",
     "cross-env": "5.2.0",
     "fetch-hoc": "^0.4.0",
+    "gh-pages": "^2.0.1",
     "mobx": "^5.5.0",
     "mobx-react": "^5.2.8",
     "partial.lenses": "^14.10.0",
