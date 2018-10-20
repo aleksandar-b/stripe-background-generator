@@ -1,16 +1,20 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import * as PropTypes from 'prop-types';
-import SvgBackground from './SvgBackground';
+import SvgBackground from './svg/SvgBackground';
+// import GridCssBackground from './GridCssBackground';
+import Intro from './Intro';
+import ProductImage from './ProductImage';
 
 const styles = {
   content: {
     flexGrow: 1,
     display: 'flex',
-    'justify-content': 'center',
-    'align-items': 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
     height: '760px',
-    overflow: 'auto',
+    width: '100vw',
+    overflow: 'hidden',
   },
 };
 
@@ -18,6 +22,8 @@ const Hero = ({ classes }) => {
   return (
     <main className={classes.content}>
       <SvgBackground />
+      <Intro />
+      <ProductImage />
     </main>
   );
 };

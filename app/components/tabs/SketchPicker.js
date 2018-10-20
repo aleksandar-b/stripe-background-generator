@@ -3,7 +3,7 @@
 import React from 'react';
 import { SketchPicker } from 'react-color';
 import { observer, inject } from 'mobx-react';
-import { toRgbString } from '../utils/Helpers';
+import { toRgbString } from '../../utils/Helpers';
 
 class Sketch extends React.Component {
   state = {
@@ -26,11 +26,6 @@ class Sketch extends React.Component {
     } else {
       store.handleChangeColor({ id: color.id, value: c.rgb, standard: toRgbString(c.rgb) });
     }
-  };
-
-  handleChangeBackgroundColor = c => {
-    const { store, color } = this.props;
-    store.handleChangeColor({ id: color.id, value: c.rgb, standard: toRgbString(c.rgb) });
   };
 
   render() {

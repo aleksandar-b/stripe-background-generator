@@ -9,3 +9,9 @@ export const stripeStyles = [
   { id: 'outline', label: 'Outline' },
   { id: 'mixed', label: 'Mixed' },
 ];
+
+export const circlePositions = [
+  { id: 'none', label: 'None' },
+  { id: 'topLeft', label: 'Top Left' },
+  { id: 'random', label: 'Random' },
+];

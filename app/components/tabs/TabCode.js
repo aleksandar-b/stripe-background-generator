@@ -2,14 +2,14 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { inject, observer } from 'mobx-react';
-import SvgBackground from './SvgBackground';
+import SvgBackground from '../svg/SvgBackground';
 
 function TabCode(props) {
   const { store } = props;
   return (
-    <pre style={{ whiteSpace: 'pre-wrap' }}>
-      <code>{renderToString(<SvgBackground store={store} />)}</code>
-    </pre>
+    <div style={{ maxWidth: 200, overflow: 'none' }}>
+      <pre style={{ whiteSpace: 'pre-wrap' }}>{renderToString(<SvgBackground store={store} />)}</pre>
+    </div>
   );
 }
 

@@ -1,17 +1,56 @@
 import { observable, action, computed } from 'mobx';
-import { flatten, repeat } from 'ramda';
+import { flatten, repeat, last, head } from 'ramda';
+import chroma from 'chroma-js';
 import Grid from '../utils/Grid';
 import { coinFlip, random } from '../utils/Helpers';
+import Color from '../model/Color';
+import Stripe from '../model/Stripe';
 
 class Store {
   @observable
-  background = [{ value: { r: 240, g: 240, b: 240, a: 1 }, id: Math.random(), standard: 'rgba(245, 245, 245, 1)' }];
+  grid = {
+    columns: 10,
+    rows: 10,
+    gap: 10,
+  };
+
+  @observable
+  background = [new Color({ r: 240, g: 240, b: 240, a: 1 })];
+
+  @observable
+  stripes = [
+    new Stripe(1, 3, 2, 3, [new Color({ r: 23, g: 54, b: 1, a: 1 }), new Color({ r: 123, g: 154, b: 100, a: 1 })]),
+    new Stripe(4, 6, 3, 4, [
+      new Color({ r: 23, g: 54, b: 1, a: 1 }),
+      new Color({ r: 223, g: 154, b: 100, a: 1 }),
+      new Color({ r: 123, g: 154, b: 100, a: 1 }),
+    ]),
+    new Stripe(7, 9, 6, 8, [
+      new Color({ r: 165, g: 124, b: 100, a: 1 }),
+      new Color({ r: 123, g: 154, b: 100, a: 1 }),
+      new Color({ r: 123, g: 154, b: 100, a: 1 }),
+    ]),
+  ];
+
+  @action
+  resetStripes() {
+    this.stripes = chroma
+      .bezier([chroma.random(), chroma.random(), chroma.random()])
+      .scale()
+      .colors(10)
+      .map((hex, idx) => {
+        const [r, g, b, a] = chroma(hex).rgba();
+        return new Stripe(random(0, this.grid.columns), random(0, this.grid.columns), 2 + idx, 3 + idx, [
+          new Color({ r, g, b, a }),
+        ]);
+      });
+  }
 
   @observable
   palette = [
-    { value: { r: 23, g: 54, b: 1, a: 1 }, id: Math.random(), standard: 'rgba(0, 0, 0, 1)' },
-    { value: { r: 23, g: 54, b: 1, a: 1 }, id: Math.random(), standard: 'rgba(0, 0, 0, 0)' },
-    { value: { r: 23, g: 224, b: 216, a: 1 }, id: Math.random(), standard: '#23B5DC' },
+    new Color({ r: 23, g: 54, b: 1, a: 1 }),
+    new Color({ r: 23, g: 54, b: 1, a: 1 }),
+    new Color({ r: 23, g: 224, b: 216, a: 1 }),
   ];
 
   @observable
@@ -37,6 +76,9 @@ class Store {
 
   @observable
   stripeAlpha = 1;
+
+  @observable
+  circlePosition = 'topLeft';
 
   @action
   setPalette(palette) {
@@ -112,9 +154,24 @@ class Store {
     this.columns = data;
   }
 
+  @action
+  handleCirclePosition(data) {
+    this.circlePosition = data;
+  }
+
   @computed
   get getPalette() {
     return this.palette;
+  }
+
+  @computed
+  get headOfPalette() {
+    return head(this.palette);
+  }
+
+  @computed
+  get lastOfPalette() {
+    return last(this.palette);
   }
 
   fill(value) {

@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
+import { times } from 'ramda';
 import { withStyles } from '@material-ui/core/styles';
 import { inject, observer, PropTypes } from 'mobx-react';
-import TabsControl from './TabsControl';
+import TabsControl from './tabs/TabsControl';
+import { circlePositions } from '../utils/Constants';
+import { random } from '../utils/Helpers';
 
 const styles = theme => ({
   root: {
@@ -31,8 +34,17 @@ class Controls extends Component {
   };
 
   componentDidMount() {
-    const { gradientStore } = this.props;
-    gradientStore.fetchGradients();
+    const { randomColorStore, store } = this.props;
+    randomColorStore.fetchGradients().then(() => {
+      times(
+        idx =>
+          setTimeout(() => {
+            store.circlePosition = circlePositions[random(0, 2)].id;
+            randomColorStore.setRandomBackgroundAndPaletteFromGradients();
+          }, 1000 * idx),
+        8,
+      );
+    });
   }
 
   toggleTabs = () => {
@@ -56,6 +68,7 @@ class Controls extends Component {
 
 Controls.propTypes = {
   classes: PropTypes.objectOrObservableObject.isRequired,
-  gradientStore: PropTypes.objectOrObservableObject.isRequired,
+  randomColorStore: PropTypes.objectOrObservableObject.isRequired,
+  store: PropTypes.objectOrObservableObject.isRequired,
 };
-export default withStyles(styles)(inject('gradientStore')(observer(Controls)));
+export default withStyles(styles)(inject('randomColorStore', 'store')(observer(Controls)));

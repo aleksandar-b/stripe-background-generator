@@ -29,7 +29,6 @@ const styles = theme => ({
     right: 10,
     backgroundColor: theme.palette.background.paper,
     boxShadow: '0 3px 5px 2px rgba(0, 0, 0, .1)',
-    width: 350,
   },
 });
 
@@ -53,7 +52,7 @@ class TabsControl extends React.Component {
     return (
       <div className={classes.root}>
         <AppBar position="static" color="default">
-          <Tabs value={value} onChange={this.handleChange} indicatorColor="primary" textColor="primary">
+          <Tabs value={value} onChange={this.handleChange} indicatorColor="primary" textColor="primary" fullWidth>
             <Tab label="Design" />
             <Tab label="Code" />
           </Tabs>

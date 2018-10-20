@@ -2,14 +2,11 @@ import React, { Component } from 'react';
 import { observer, inject, PropTypes } from 'mobx-react';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem/MenuItem';
-import { Checkboard } from 'react-color/lib/components/common';
-
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton/IconButton';
-import Flex, { FlexItem } from 'styled-flex-component';
+import Grid from '@material-ui/core/Grid';
 import ColorPaletteList from './ColorPaletteList';
-import { stripeSizes, stripeStyles } from '../utils/Constants';
-import GradientsStore from './GradientsStore';
+import { stripeSizes, stripeStyles, circlePositions } from '../../utils/Constants';
 
 class TabDesign extends Component {
   state = {
@@ -36,41 +33,41 @@ class TabDesign extends Component {
 
   render() {
     const {
-      store: { rows, columns, stripeSize, stripeStyle, stripeRound, background, palette, stripeAlpha },
+      store: { rows, columns, stripeSize, stripeStyle, stripeRound, background, palette, stripeAlpha, circlePosition },
     } = this.props;
-    const { store } = this.props;
+    const { store, randomColorStore } = this.props;
 
     return (
       <>
-        <Flex column>
-          <Flex flex justifyBetween alignCenter>
+        <Grid direction="column">
+          <Grid direction="row" container justify="space-between">
             <h3>Background</h3>
-            <IconButton onClick={() => GradientsStore.setRandomBackgroundAndPaletteFromGradients()}>
+            <IconButton onClick={() => randomColorStore.setRandomBackgroundAndPaletteFromGradients()}>
               <Icon>refresh_icon</Icon>
             </IconButton>
             <IconButton onClick={() => store.addBackgroundPalette({ id: Math.random(), value: '#000000' })}>
               <Icon>add_icon</Icon>
             </IconButton>
-          </Flex>
-          <Flex flex>
+          </Grid>
+          <Grid flex>
             <ColorPaletteList palette={background} backgroundPicker />
-          </Flex>
-        </Flex>
-        <Flex column>
-          <Flex flex justifyBetween alignCenter>
+          </Grid>
+        </Grid>
+        <Grid column>
+          <Grid direction="row" container justify="space-between">
             <h3>Palette</h3>
             <IconButton onClick={() => store.addPalette({ id: Math.random(), value: '#000000' })}>
               <Icon>add_icon</Icon>
             </IconButton>
-          </Flex>
-          <Flex flex>
+          </Grid>
+          <Grid flex>
             <ColorPaletteList palette={palette} />
-          </Flex>
-        </Flex>
-        <Flex column>
+          </Grid>
+        </Grid>
+        <Grid column>
           <h3>Grid</h3>
-          <Flex justifyAround contentSpaceAround>
-            <FlexItem grow={1} style={{ marginRight: 16 }}>
+          <Grid container spacing={32} alignItems="center">
+            <Grid item xs>
               <TextField
                 fullWidth
                 id="rows"
@@ -81,8 +78,8 @@ class TabDesign extends Component {
                 onChange={this.handleChange('Rows')}
                 margin="normal"
               />
-            </FlexItem>
-            <FlexItem grow={1} style={{ marginLeft: 16 }}>
+            </Grid>
+            <Grid item xs>
               <TextField
                 fullWidth
                 id="columns"
@@ -93,13 +90,13 @@ class TabDesign extends Component {
                 onChange={this.handleChange('Columns')}
                 margin="normal"
               />
-            </FlexItem>
-          </Flex>
-        </Flex>
-        <Flex column>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid column>
           <h3>Stripe</h3>
-          <Flex justifyBetween contentSpaceAround alignCenter>
-            <FlexItem grow={1} style={{ marginRight: 16 }}>
+          <Grid container spacing={32} alignItems="center">
+            <Grid item xs>
               <TextField
                 fullWidth
                 id="stripe-size"
@@ -115,8 +112,8 @@ class TabDesign extends Component {
                   </MenuItem>
                 ))}
               </TextField>
-            </FlexItem>
-            <FlexItem grow={1}>
+            </Grid>
+            <Grid item xs>
               <TextField
                 fullWidth
                 id="stripe-style"
@@ -132,12 +129,12 @@ class TabDesign extends Component {
                   </MenuItem>
                 ))}
               </TextField>
-            </FlexItem>
-          </Flex>
-        </Flex>
-        <Flex column>
-          <Flex justifyBetween contentSpaceAround alignCenter>
-            <FlexItem grow={1} style={{ marginRight: 16 }}>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid column>
+          <Grid container spacing={32} alignItems="center">
+            <Grid item xs>
               <TextField
                 fullWidth
                 id="stripe-round"
@@ -148,8 +145,8 @@ class TabDesign extends Component {
                 onChange={this.handleChange('StripeRound')}
                 margin="normal"
               />
-            </FlexItem>
-            <FlexItem grow={1} style={{ marginLeft: 16 }}>
+            </Grid>
+            <Grid item xs>
               <TextField
                 fullWidth
                 id="stripe-alpha"
@@ -160,9 +157,31 @@ class TabDesign extends Component {
                 onChange={this.handleChange('StripeAlpha')}
                 margin="normal"
               />
-            </FlexItem>
-          </Flex>
-        </Flex>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid column>
+          <h3>Circles</h3>
+          <Grid container spacing={32} alignItems="center">
+            <Grid item xs>
+              <TextField
+                fullWidth
+                id="circle-position"
+                select
+                label="Position"
+                value={circlePosition}
+                onChange={this.handleChange('CirclePosition')}
+                margin="normal"
+              >
+                {circlePositions.map(option => (
+                  <MenuItem key={option.id} value={option.id}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Grid>
+          </Grid>
+        </Grid>
       </>
     );
   }
@@ -170,6 +189,7 @@ class TabDesign extends Component {
 
 TabDesign.propTypes = {
   store: PropTypes.observableObject.isRequired,
+  randomColorStore: PropTypes.observableObject.isRequired,
 };
 
-export default inject('store')(observer(TabDesign));
+export default inject('store', 'randomColorStore')(observer(TabDesign));

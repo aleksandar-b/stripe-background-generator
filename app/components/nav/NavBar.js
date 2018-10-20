@@ -4,6 +4,8 @@ import Toolbar from '@material-ui/core/Toolbar/Toolbar';
 import Typography from '@material-ui/core/Typography/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import * as PropTypes from 'prop-types';
+import { inject, observer } from 'mobx-react';
+import chroma from 'chroma-js';
 
 const styles = {
   root: {
@@ -12,14 +14,15 @@ const styles = {
   grow: {
     flexGrow: 1,
   },
-  text: {
-    backgroundImage: 'linear-gradient(90deg, #43c6ac, #f8ffae)',
-  },
 };
 
 const NavBar = props => {
-  const { classes } = props;
+  const {
+    classes,
+    store: { headOfPalette },
+  } = props;
 
+  const color = value => (chroma(value).luminance() > 0.5 ? '#000' : '#fff');
   return (
     <div className={classes.root}>
       <AppBar position="fixed" style={{ background: 'transparent', boxShadow: 'none' }}>
@@ -30,15 +33,16 @@ const NavBar = props => {
             className={classes.grow}
             style={{ fontWeight: 300, fontFamily: 'Apercu,Helvetica Neue,Helvetica,Arial,sans-serif' }}
           >
-            <span
-              style={{
-                backgroundImage: 'linear-gradient(90deg,#43c6ac,#f8ffae)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
-              Background Stripe Generator
-            </span>
+            <div>
+              <span
+                style={{
+                  fontFamily: 'Apercu,Helvetica Neue,Helvetica,Arial,sans-serif',
+                  color: color(headOfPalette).standard,
+                }}
+              >
+                Background Stripe Generator
+              </span>
+            </div>
           </Typography>
         </Toolbar>
       </AppBar>
@@ -48,6 +52,7 @@ const NavBar = props => {
 
 NavBar.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  store: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
-export default withStyles(styles)(NavBar);
+export default withStyles(styles)(inject('store')(observer(NavBar)));

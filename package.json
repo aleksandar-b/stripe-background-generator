@@ -1,6 +1,6 @@
 {
   "name": "stripe-background-generator",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Background generator Stripe way.",
   "main": "index.js",
   "scripts": {
@@ -44,8 +44,6 @@
     "@material-ui/lab": "^3.0.0-alpha.19",
     "chroma-js": "^1.4.0",
     "cross-env": "5.2.0",
-    "fetch-hoc": "^0.4.0",
-    "gh-pages": "^2.0.1",
     "mobx": "^5.5.0",
     "mobx-react": "^5.2.8",
     "partial.lenses": "^14.10.0",
@@ -54,14 +52,11 @@
     "react": "16.5.2",
     "react-color": "^2.14.1",
     "react-dom": "16.5.2",
-    "react-flex": "^2.2.8",
     "react-hot-loader": "4.3.11",
     "react-router-dom": "4.3.0",
     "react-swipeable-views": "^0.13.0",
     "shallowequal": "^1.1.0",
-    "simple-flexbox": "^1.2.0",
-    "styled-components": "^3.4.9",
-    "styled-flex-component": "^2.2.2"
+    "styled-components": "^3.4.9"
   },
   "devDependencies": {
     "@babel/cli": "7.1.0",

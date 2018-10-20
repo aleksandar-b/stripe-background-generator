@@ -1,8 +1,21 @@
 import React from 'react';
-import MobXProvider from './MobXProvider';
+import { Provider } from 'mobx-react';
+import Store from '../store/Store';
+import RandomColorsStore from '../store/RandomColorsStore';
+import NavBar from './nav/NavBar';
+import Hero from './Hero';
+import FabButton from './FabButton';
 
 const App = () => {
-  return <MobXProvider />;
+  return (
+    <Provider store={Store} randomColorStore={RandomColorsStore}>
+      <>
+        <NavBar />
+        <Hero />
+        <FabButton />
+      </>
+    </Provider>
+  );
 };
 
 export default App;
