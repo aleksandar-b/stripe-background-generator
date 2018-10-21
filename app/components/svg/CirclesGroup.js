@@ -1,7 +1,6 @@
 import React from 'react';
 import chroma from 'chroma-js';
 import { coinFlip } from '../../utils/Helpers';
-// import { coinFlip } from '../../utils/Helpers';
 
 const CirclesGroup = ({ palette, circles = 5, size = 10, position = 'center', style = 'mixed', circleAnimation }) => {
   const positions = {
