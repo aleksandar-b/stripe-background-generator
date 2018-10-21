@@ -46,7 +46,6 @@
     "cross-env": "5.2.0",
     "mobx": "^5.5.0",
     "mobx-react": "^5.2.8",
-    "partial.lenses": "^14.10.0",
     "prop-types": "^15.6.2",
     "ramda": "^0.25.0",
     "react": "16.5.2",
