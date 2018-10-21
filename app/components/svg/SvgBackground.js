@@ -54,23 +54,6 @@ const SvgBackground = ({
            transform-origin: center;
            `}
       </style>
-      <defs>
-        <filter id="drop-shadow" x="-100%" y="-50%" width="300%" height="300%">
-          <feGaussianBlur in="SourceAlpha" stdDeviation="2" />
-          <feOffset dx="2" dy="2" result="offsetblur" />
-          <feFlood floodColor="#000000" floodOpacity=".2" />
-          <feComposite in2="offsetblur" operator="in" />
-          <feMerge>
-            <feMergeNode />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-        <linearGradient id="shadow-gradient">
-          <stop offset="0%" stopColor="rgba(0,0,0, .7)" />
-          <stop offset="60%" stopColor="rgba(0,0,0, .1)" />
-          <stop offset="99%" stopColor="rgba(0,0,0, .0)" />
-        </linearGradient>
-      </defs>
       <g>
         {randomGeneratedStripesSvg.map(({ position, width, fill, stroke }) => {
           return (
