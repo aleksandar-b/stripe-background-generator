@@ -98,6 +98,9 @@ class Store {
   @observable
   isCopied = false;
 
+  @observable
+  isRectangular = true;
+
   @action
   setPalette(palette) {
     this.palette = palette;
@@ -253,6 +256,11 @@ class Store {
   @action
   toggleSnackBar() {
     this.isCopied = !this.isCopied;
+  }
+
+  @action
+  toggleRectangular() {
+    this.isRectangular = !this.isRectangular;
   }
 
   fill(value) {

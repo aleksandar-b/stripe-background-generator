@@ -76,6 +76,13 @@ class TabDesign extends Component {
             className={classes.refresh}
           />
           <Chip
+            icon={store.isRectangular ? <Icon>call_made_icon</Icon> : <Icon>crop_landscape_icon</Icon>}
+            label={store.isRectangular ? `Switch to non rectangular` : `Switch to rectangular`}
+            color="primary"
+            onClick={() => store.toggleRectangular()}
+            className={classes.refresh}
+          />
+          <Chip
             icon={<Icon>add_icon</Icon>}
             label="Add Background"
             color="primary"

@@ -3,22 +3,23 @@ import { observer, inject, PropTypes } from 'mobx-react';
 import Stripe from './Stripe';
 import CirclesGroup from './CirclesGroup';
 
-const getStyles = linearGradientBackground => {
+const getStyles = (linearGradientBackground, isRectangular) => {
   return {
     overflow: 'hidden',
     width: '100%',
     height: '100%',
     transformOrigin: 0,
+    ...(!isRectangular && { transform: 'skewY(-12deg)' }),
     background: linearGradientBackground,
   };
 };
 
 const SvgBackground = ({
   store,
-  store: { linearGradientBackground, randomGeneratedStripesSvg, circlePosition, circlesGroup },
+  store: { linearGradientBackground, randomGeneratedStripesSvg, circlePosition, circlesGroup, isRectangular },
 }) => {
   return (
-    <svg style={getStyles(linearGradientBackground)} xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <svg style={getStyles(linearGradientBackground, isRectangular)} xmlns="http://www.w3.org/2000/svg" version="1.1">
       <style>
         {circlesGroup.some(({ circleAnimation }) => circleAnimation) &&
           `

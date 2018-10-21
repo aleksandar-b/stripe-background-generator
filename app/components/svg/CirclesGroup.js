@@ -30,9 +30,9 @@ const CirclesGroup = ({ palette, circles = 5, size = 10, position = 'center', st
           key={Math.random()}
           className="puls"
           style={{
-            ...(circleAnimation && {
+            ...((circleAnimation && {
               animation: `circle-small-scale 3s ease-in-out ${(scaled.length - 1 - idx) * 0.3}s infinite alternate`,
-            }),
+            }) || { animation: 'none' }),
           }}
           fill={fillStyle(style)(color)}
           {...positions[position]}
