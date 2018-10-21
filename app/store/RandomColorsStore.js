@@ -13,7 +13,7 @@ class RandomColorsStore {
       return gradient.colors.map(hex => {
         const color = chroma(hex);
         const [r, g, b, a] = color.rgba();
-        return { id: Math.random(), value: { r, g, b, a }, standard: color.css() };
+        return { id: Math.random(), value: { r, g, b, a }, standard: color.css(), name: gradient.name };
       });
     });
   };
@@ -66,6 +66,7 @@ class RandomColorsStore {
   @action
   setRandomBackgroundAndPaletteFromGradients() {
     const randomGradients = this.gradients[random(0, this.gradients.length - 1)];
+    Store.currentBackgroundName = randomGradients[0].name;
     Store.setBackgroundPalette(randomGradients);
     Store.setPalette(this.generatePaletteFromUiGradients(randomGradients));
   }

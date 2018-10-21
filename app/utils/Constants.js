@@ -13,5 +13,13 @@ export const stripeStyles = [
 export const circlePositions = [
   { id: 'none', label: 'None' },
   { id: 'topLeft', label: 'Top Left' },
-  { id: 'random', label: 'Random' },
+  { id: 'topRight', label: 'Top Right' },
+  { id: 'bottomLeft', label: 'Bottom Left' },
+  { id: 'bottomRight', label: 'Bottom Right' },
+  { id: 'center', label: 'Center' },
+];
+export const circleStyles = [
+  { id: 'fill', label: 'Fill' },
+  { id: 'outline', label: 'Outline' },
+  { id: 'mixed', label: 'Mixed' },
 ];

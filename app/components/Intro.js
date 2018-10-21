@@ -60,6 +60,8 @@ const Intro = props => {
   const {
     classes,
     store: { headOfPalette, lastOfPalette },
+    store,
+    randomColorStore,
   } = props;
 
   const color = value => (chroma(value).luminance() > 0.5 ? '#000' : '#fff');
@@ -106,20 +108,9 @@ const Intro = props => {
         />
         <Header>The new standard in background generators</Header>
         <BodyText>
-          Stripe is the best software platform for running an internet business. We handle billions of dollars every year for
-          forward-thinking businesses around the world.
+          Background generator is the best software platform for running an internet business. We handle billions of dollars
+          every year for forward-thinking businesses around the world.
         </BodyText>
-        <Button
-          variant="contained"
-          size="large"
-          className={classes.primaryButton}
-          style={{
-            background: headOfPalette.standard,
-            color: color(headOfPalette.standard),
-          }}
-        >
-          Primary
-        </Button>
         <Button
           variant="contained"
           size="large"
@@ -128,8 +119,21 @@ const Intro = props => {
             background: lastOfPalette.standard,
             color: color(lastOfPalette.standard),
           }}
+          onClick={() => randomColorStore.setRandomBackgroundAndPaletteFromGradients()}
         >
-          Secondary
+          Next Palette
+        </Button>
+        <Button
+          variant="contained"
+          size="large"
+          className={classes.primaryButton}
+          style={{
+            background: headOfPalette.standard,
+            color: color(headOfPalette.standard),
+          }}
+          onClick={() => store.toggleTabs()}
+        >
+          Try now
         </Button>
       </div>
     </section>
@@ -139,6 +143,7 @@ const Intro = props => {
 Intro.propTypes = {
   classes: PropTypes.objectOrObservableObject.isRequired,
   store: PropTypes.objectOrObservableObject.isRequired,
+  randomColorStore: PropTypes.objectOrObservableObject.isRequired,
 };
 
-export default withStyles(styles)(inject('store')(observer(Intro)));
+export default withStyles(styles)(inject('store', 'randomColorStore')(observer(Intro)));

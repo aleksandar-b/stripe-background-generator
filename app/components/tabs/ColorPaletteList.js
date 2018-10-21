@@ -19,6 +19,9 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'flex-end',
   },
+  deleteButton: {
+    padding: theme.spacing.unit,
+  },
 });
 
 const ColorPaletteList = props => {
@@ -41,7 +44,7 @@ const ColorPaletteList = props => {
               <SketchPicker backgroundPicker={backgroundPicker} color={color} />
             </ListItemText>
             <ListItemSecondaryAction>
-              <IconButton aria-label="Delete" onClick={() => handleDeleteColor(color)}>
+              <IconButton aria-label="Delete" className={classes.deleteButton} onClick={() => handleDeleteColor(color)}>
                 <Icon>delete_icon </Icon>
               </IconButton>
             </ListItemSecondaryAction>

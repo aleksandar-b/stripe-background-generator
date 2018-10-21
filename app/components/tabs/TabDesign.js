@@ -4,9 +4,11 @@ import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton/IconButton';
+import FormControlLabel from '@material-ui/core/FormControlLabel/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox/Checkbox';
 import Grid from '@material-ui/core/Grid';
 import ColorPaletteList from './ColorPaletteList';
-import { stripeSizes, stripeStyles, circlePositions } from '../../utils/Constants';
+import { stripeSizes, stripeStyles, circlePositions, circleStyles } from '../../utils/Constants';
 
 class TabDesign extends Component {
   state = {
@@ -33,19 +35,34 @@ class TabDesign extends Component {
 
   render() {
     const {
-      store: { rows, columns, stripeSize, stripeStyle, stripeRound, background, palette, stripeAlpha, circlePosition },
+      store: {
+        rows,
+        columns,
+        stripeSize,
+        stripeStyle,
+        stripeRound,
+        background,
+        palette,
+        stripeAlpha,
+        circlePosition,
+        circleStyle,
+        circleQuantity,
+        circleSize,
+        circleAnimation,
+        showCirclesSection,
+      },
     } = this.props;
-    const { store, randomColorStore } = this.props;
+    const { store } = this.props;
 
     return (
       <>
         <Grid direction="column">
           <Grid direction="row" container justify="space-between">
             <h3>Background</h3>
-            <IconButton onClick={() => randomColorStore.setRandomBackgroundAndPaletteFromGradients()}>
+            <IconButton onClick={() => store.forceRefresh()}>
               <Icon>refresh_icon</Icon>
             </IconButton>
-            <IconButton onClick={() => store.addBackgroundPalette({ id: Math.random(), value: '#000000' })}>
+            <IconButton onClick={() => store.addBackgroundPalette({ r: 255, g: 255, b: 255, a: 1 })}>
               <Icon>add_icon</Icon>
             </IconButton>
           </Grid>
@@ -56,7 +73,7 @@ class TabDesign extends Component {
         <Grid column>
           <Grid direction="row" container justify="space-between">
             <h3>Palette</h3>
-            <IconButton onClick={() => store.addPalette({ id: Math.random(), value: '#000000' })}>
+            <IconButton onClick={() => store.addPalette({ r: 255, g: 255, b: 255, a: 1 })}>
               <Icon>add_icon</Icon>
             </IconButton>
           </Grid>
@@ -161,7 +178,7 @@ class TabDesign extends Component {
           </Grid>
         </Grid>
         <Grid column>
-          <h3>Circles</h3>
+          <h3>Circles Group</h3>
           <Grid container spacing={32} alignItems="center">
             <Grid item xs>
               <TextField
@@ -180,6 +197,67 @@ class TabDesign extends Component {
                 ))}
               </TextField>
             </Grid>
+            <Grid item xs>
+              <TextField
+                fullWidth
+                id="circle-style"
+                select
+                label="Style"
+                value={circleStyle}
+                onChange={this.handleChange('CircleStyle')}
+                margin="normal"
+              >
+                {circleStyles.map(option => (
+                  <MenuItem key={option.id} value={option.id}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Grid>
+          </Grid>
+          <Grid container spacing={32} alignItems="center">
+            <Grid item xs>
+              <TextField
+                fullWidth
+                id="circle-quantity"
+                label="Number"
+                type="number"
+                inputProps={{ min: 0, max: 100 }}
+                value={circleQuantity}
+                onChange={this.handleChange('CircleQuantity')}
+                margin="normal"
+              />
+            </Grid>
+            <Grid item xs>
+              <TextField
+                fullWidth
+                id="circle-size"
+                label="Size"
+                type="number"
+                inputProps={{ min: 0, max: 100 }}
+                value={circleSize}
+                onChange={this.handleChange('CircleSize')}
+                margin="normal"
+              />
+            </Grid>
+          </Grid>
+          <Grid container spacing={32} alignItems="center">
+            <Grid item xs>
+              <FormControlLabel
+                control={
+                  showCirclesSection && (
+                    <Checkbox
+                      checked={circleAnimation}
+                      onChange={this.handleChange('CircleAnimation')}
+                      value={circleAnimation}
+                      label="Animation"
+                      color="primary"
+                    />
+                  )
+                }
+                label="Animation"
+              />
+            </Grid>
           </Grid>
         </Grid>
       </>
@@ -189,7 +267,6 @@ class TabDesign extends Component {
 
 TabDesign.propTypes = {
   store: PropTypes.observableObject.isRequired,
-  randomColorStore: PropTypes.observableObject.isRequired,
 };
 
-export default inject('store', 'randomColorStore')(observer(TabDesign));
+export default inject('store')(observer(TabDesign));

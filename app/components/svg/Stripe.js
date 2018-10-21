@@ -17,20 +17,11 @@ const getAttributes = ({ height, width, top, left, r, stroke, fill }) => {
 
 const Stripe = props => {
   const attributes = getAttributes(props);
-  const { circlePosition } = props;
 
   return coinFlip() ? (
     <rect {...attributes} />
   ) : (
-    circlePosition !== 'none' && (
-      <circle
-        r={attributes.width}
-        stroke={circlePosition === 'none' ? 'none' : attributes.stroke}
-        fill={circlePosition === 'none' ? 'none' : attributes.fill}
-        cx={circlePosition === 'random' ? attributes.x : 0}
-        cy={circlePosition === 'random' ? attributes.x : 0}
-      />
-    )
+    <circle r={attributes.width} stroke={attributes.stroke} fill={attributes.fill} cx={attributes.x} cy={attributes.y} />
   );
 };
 

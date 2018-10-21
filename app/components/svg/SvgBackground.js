@@ -8,6 +8,7 @@ const getStyles = linearGradientBackground => {
     overflow: 'hidden',
     width: '100%',
     height: '100%',
+    transform: 'skewY(-12deg)',
     transformOrigin: 0,
     background: linearGradientBackground,
   };
@@ -17,10 +18,11 @@ const SvgBackground = ({ store, store: { linearGradientBackground, randomGenerat
   return (
     <svg style={getStyles(linearGradientBackground)} xmlns="http://www.w3.org/2000/svg" version="1.1">
       <style>
-        {`
+        {store.circleAnimation &&
+          `
         @-webkit-keyframes circle-small-scale {
           0% {
-            -webkit-transform: scale(1.0);
+            -webkit-transform: scale(1);
           }
           100% {
             -webkit-transform: scale(1.1);
@@ -28,7 +30,7 @@ const SvgBackground = ({ store, store: { linearGradientBackground, randomGenerat
         }
         @keyframes circle-small-scale {
           0% {
-            transform: scale(1.0);
+            transform: scale(1);
           }
           100% {
             transform: scale(1.1);
@@ -74,7 +76,14 @@ const SvgBackground = ({ store, store: { linearGradientBackground, randomGenerat
           );
         })}
       </g>
-      <CirclesGroup palette={store.palette} />
+      <CirclesGroup
+        palette={store.palette}
+        size={store.circleSize}
+        position={store.circlePosition}
+        circles={store.circleQuantity}
+        style={store.circleStyle}
+        circleAnimation={store.circleAnimation}
+      />
     </svg>
   );
 };

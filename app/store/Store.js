@@ -54,6 +54,9 @@ class Store {
   ];
 
   @observable
+  isTabsOpen = false;
+
+  @observable
   currentPaletteName = '';
 
   @observable
@@ -78,7 +81,42 @@ class Store {
   stripeAlpha = 1;
 
   @observable
-  circlePosition = 'topLeft';
+  showCirclesSection = true;
+
+  @observable
+  circlePosition = 'center';
+
+  @observable
+  circleSize = 10;
+
+  @observable
+  circleQuantity = 5;
+
+  @observable
+  circleStyle = 'mixed';
+
+  @observable
+  circleAnimation = true;
+
+  @action
+  handleCircleSize(data) {
+    this.circleSize = data;
+  }
+
+  @action
+  handleCircleQuantity(data) {
+    this.circleQuantity = data;
+  }
+
+  @action
+  handleCircleStyle(data) {
+    this.circleStyle = data;
+  }
+
+  @action
+  handleCircleAnimation() {
+    this.circleAnimation = !this.circleAnimation;
+  }
 
   @action
   setPalette(palette) {
@@ -87,7 +125,7 @@ class Store {
 
   @action
   addPalette(color) {
-    this.palette.push(color);
+    this.palette.push(new Color(color));
   }
 
   @action
@@ -97,7 +135,7 @@ class Store {
 
   @action
   addBackgroundPalette(color) {
-    this.background.push(color);
+    this.background.push(new Color(color));
   }
 
   @action
@@ -157,6 +195,27 @@ class Store {
   @action
   handleCirclePosition(data) {
     this.circlePosition = data;
+  }
+
+  @action
+  toggleTabs() {
+    this.isTabsOpen = !this.isTabsOpen;
+  }
+
+  @action
+  forceRefreshPalette() {
+    this.palette = this.palette.slice();
+  }
+
+  @action
+  forceRefreshBackground() {
+    this.background = this.background.slice();
+  }
+
+  @action
+  forceRefresh() {
+    this.forceRefreshPalette();
+    this.forceRefreshBackground();
   }
 
   @computed
