@@ -32,10 +32,10 @@ const SvgBackground = ({
         }
         @-moz-keyframes circle-small-scale {
           0% {
-            -webkit-transform: scale(1);
+            -moz-transform: scale(1);
           }
           100% {
-            -webkit-transform: scale(1.1);
+            -moz-transform: scale(1.1);
           }
         }
         @keyframes circle-small-scale {
