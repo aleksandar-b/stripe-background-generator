@@ -4,5 +4,5 @@ Generate random backgrounds
 #1 Material Circles example
 https://material-circles-version.now.sh
 
-#) Stripe like eample
+#2 Stripe like eample
 https://background-stripe-generator.now.sh/
