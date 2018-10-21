@@ -204,7 +204,7 @@ class Store {
       circleSize: 5,
       circleQuantity: 5,
       circleStyle: 'fill',
-      circleAnimation: true,
+      circleAnimation: false,
     });
   }
 
