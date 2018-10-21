@@ -8,7 +8,6 @@ const getStyles = linearGradientBackground => {
     overflow: 'hidden',
     width: '100%',
     height: '100%',
-    transform: 'skewY(-12deg)',
     transformOrigin: 0,
     background: linearGradientBackground,
   };

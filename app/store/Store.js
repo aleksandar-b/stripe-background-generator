@@ -98,25 +98,8 @@ class Store {
   @observable
   circleAnimation = true;
 
-  @action
-  handleCircleSize(data) {
-    this.circleSize = data;
-  }
-
-  @action
-  handleCircleQuantity(data) {
-    this.circleQuantity = data;
-  }
-
-  @action
-  handleCircleStyle(data) {
-    this.circleStyle = data;
-  }
-
-  @action
-  handleCircleAnimation() {
-    this.circleAnimation = !this.circleAnimation;
-  }
+  @observable
+  isCopied = false;
 
   @action
   setPalette(palette) {
@@ -218,6 +201,26 @@ class Store {
     this.forceRefreshBackground();
   }
 
+  @action
+  handleCircleSize(data) {
+    this.circleSize = data;
+  }
+
+  @action
+  handleCircleQuantity(data) {
+    this.circleQuantity = data;
+  }
+
+  @action
+  handleCircleStyle(data) {
+    this.circleStyle = data;
+  }
+
+  @action
+  handleCircleAnimation() {
+    this.circleAnimation = !this.circleAnimation;
+  }
+
   @computed
   get getPalette() {
     return this.palette;
@@ -231,6 +234,11 @@ class Store {
   @computed
   get lastOfPalette() {
     return last(this.palette);
+  }
+
+  @action
+  toggleSnackBar() {
+    this.isCopied = !this.isCopied;
   }
 
   fill(value) {

@@ -1,7 +1,7 @@
 {
   "name": "stripe-background-generator",
   "version": "0.0.4",
-  "description": "Background generator Stripe way.",
+  "description": "Background generator.",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.config.js --mode development",
@@ -51,6 +51,7 @@
     "ramda": "^0.25.0",
     "react": "16.5.2",
     "react-color": "^2.14.1",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "16.5.2",
     "react-hot-loader": "4.3.11",
     "react-router-dom": "4.3.0",

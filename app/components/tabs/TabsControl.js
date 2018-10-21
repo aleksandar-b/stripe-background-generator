@@ -30,6 +30,14 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
     boxShadow: '0 3px 5px 2px rgba(0, 0, 0, .1)',
   },
+  tabs: {
+    maxHeight: 600,
+    minHeight: 600,
+    [theme.breakpoints.down('md')]: {
+      maxHeight: 400,
+      minHeight: 400,
+    },
+  },
 });
 
 class TabsControl extends React.Component {
@@ -60,7 +68,7 @@ class TabsControl extends React.Component {
         <SwipeableViews
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
           index={value}
-          containerStyle={{ maxHeight: 600, minHeight: 600 }}
+          className={classes.tabs}
           onChangeIndex={this.handleChangeIndex}
         >
           <TabContainer dir={theme.direction}>{value === 0 && <TabDesign />}</TabContainer>

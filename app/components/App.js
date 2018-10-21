@@ -5,6 +5,7 @@ import RandomColorsStore from '../store/RandomColorsStore';
 import NavBar from './nav/NavBar';
 import Hero from './Hero';
 import FabButton from './FabButton';
+import SnackBar from './Snackbar';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <NavBar />
         <Hero />
         <FabButton />
+        <SnackBar />
       </>
     </Provider>
   );

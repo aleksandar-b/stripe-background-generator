@@ -9,7 +9,7 @@ import chroma from 'chroma-js';
 import Icon from '@material-ui/core/Icon/Icon';
 import Chip from '@material-ui/core/Chip/Chip';
 
-const styles = {
+const styles = theme => ({
   root: {
     flexGrow: 1,
   },
@@ -22,11 +22,14 @@ const styles = {
   },
   uiGradients: {
     fontSize: 12,
+    [theme.breakpoints.down('md')]: {
+      display: 'none',
+    },
   },
   github: {
     margin: '3px 0 0 6px',
   },
-};
+});
 
 const NavBar = props => {
   const {
@@ -64,7 +67,7 @@ const NavBar = props => {
               <Chip
                 icon={<Icon>beenhere_icon</Icon>}
                 label={`#${currentBackgroundName}`}
-                className={classes.announcement}
+                className={classes.uiGradients}
                 style={{
                   lineHeight: '4px',
                   fontFamily: 'Apercu,Helvetica Neue,Helvetica,Arial,sans-serif',

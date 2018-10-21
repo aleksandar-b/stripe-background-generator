@@ -24,15 +24,24 @@ const styles = theme => ({
     textDecoration: 'none',
     margin: '130px 0 30px 0',
     boxShadow: '0px 1px 2px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.10), 0px 2px 1px -1px rgba(0, 0, 0, 0.08)',
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+    },
   },
   button: {
     margin: '30px 20px 30px 0',
   },
   primaryButton: {
     margin: '30px 20px 30px 0',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
   },
   secondaryButton: {
     margin: '30px 20px 30px 0',
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+    },
   },
   divider: {
     maxWidth: '50%',
@@ -78,6 +87,7 @@ const Intro = props => {
 
     @media (max-width: 900px) {
       max-width: 100%;
+      font-size: 30px;
     }
   `;
 
