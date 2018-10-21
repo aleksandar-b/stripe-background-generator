@@ -46,7 +46,7 @@ const NavBar = props => {
             variant="title"
             color="inherit"
             className={classes.grow}
-            style={{ fontWeight: 300, fontFamily: 'Apercu,Helvetica Neue,Helvetica,Arial,sans-serif' }}
+            style={{ fontWeight: 300, fontFamily: 'Roboto,sans-serif' }}
           >
             <div className={classes.wrap}>
               <Chip
@@ -55,7 +55,7 @@ const NavBar = props => {
                 className={classes.announcement}
                 style={{
                   lineHeight: '4px',
-                  fontFamily: 'Apercu,Helvetica Neue,Helvetica,Arial,sans-serif',
+                  fontFamily: 'Roboto,sans-serif',
                   background: headOfPalette.standard,
                   color: color(headOfPalette.standard),
                   fontSize: 18,
@@ -70,7 +70,7 @@ const NavBar = props => {
                 className={classes.uiGradients}
                 style={{
                   lineHeight: '4px',
-                  fontFamily: 'Apercu,Helvetica Neue,Helvetica,Arial,sans-serif',
+                  fontFamily: 'Roboto,sans-serif',
                   background: headOfPalette.standard,
                   color: color(headOfPalette.standard),
                   fontSize: 14,

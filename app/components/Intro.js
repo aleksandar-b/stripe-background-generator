@@ -11,7 +11,7 @@ const styles = theme => ({
   root: {
     position: 'absolute',
     marginTop: '-7%',
-    fontFamily: 'Camphor,Open Sans,Segoe UI,sans-serif',
+    fontFamily: 'Roboto,sans-serif',
     margin: '150px 0 0 0',
     marginLeft: theme.spacing.unit * 2,
     marginRight: theme.spacing.unit * 2,
@@ -47,22 +47,6 @@ const styles = theme => ({
     maxWidth: '50%',
     background: 'rgba(255, 255, 255, .3)',
   },
-  header: {
-    fontSize: 40,
-    fontWeight: 300,
-    maxWidth: '70%',
-    color: '#fff',
-    fontFamily: 'Camphor,Open Sans,Segoe UI,sans-serif',
-    margin: '30px 0 30px 0',
-  },
-  bodyText: {
-    fontWeight: 300,
-    fontSize: 17,
-    color: '#fff',
-    lineHeight: '28px',
-    maxWidth: '50%',
-    margin: '30px 0 30px 0',
-  },
 });
 
 const Intro = props => {
@@ -73,7 +57,8 @@ const Intro = props => {
     randomColorStore,
   } = props;
 
-  const color = value => (chroma(value).luminance() > 0.5 ? '#000' : '#fff');
+  const color = (value, secondaryValue) =>
+    chroma(value).luminance() > 0.5 || (secondaryValue && chroma(secondaryValue).luminance() > 0.5) ? '#000' : '#fff';
 
   const Header = styled.h1`
     font-size: 40px;
@@ -82,7 +67,7 @@ const Intro = props => {
     font-family: Camphor, Open Sans, Segoe UI, sans-serif;
     margin: 30px 0 30px 0;
     ${css`
-      color: ${color(headOfPalette.standard)};
+      color: ${color(headOfPalette.standard, lastOfPalette.standard)};
     `};
 
     @media (max-width: 900px) {
@@ -99,7 +84,7 @@ const Intro = props => {
     max-width: 50%;
     margin: 30px 0 30px 0;
     ${css`
-      color: ${color(headOfPalette.standard)};
+      color: ${color(headOfPalette.standard, lastOfPalette.standard)};
     `};
 
     @media (max-width: 900px) {
