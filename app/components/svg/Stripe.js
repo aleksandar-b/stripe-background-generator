@@ -1,5 +1,4 @@
 import React from 'react';
-import { coinFlip } from '../../utils/Helpers';
 
 const getAttributes = ({ height, width, top, left, r, stroke, fill }) => {
   return {
@@ -18,11 +17,7 @@ const getAttributes = ({ height, width, top, left, r, stroke, fill }) => {
 const Stripe = props => {
   const attributes = getAttributes(props);
 
-  return coinFlip() ? (
-    <rect {...attributes} />
-  ) : (
-    <circle r={attributes.width} stroke={attributes.stroke} fill={attributes.fill} cx={attributes.x} cy={attributes.y} />
-  );
+  return <rect {...attributes} />;
 };
 
 Stripe.defaultProps = {
