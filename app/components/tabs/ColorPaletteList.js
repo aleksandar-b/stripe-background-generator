@@ -39,7 +39,7 @@ const ColorPaletteList = props => {
     <div className={classes.root}>
       <List>
         {palette.map(color => (
-          <ListItem dense button className={classes.listItem} key={color.id}>
+          <ListItem dense button key={color.id}>
             <ListItemText>
               <SketchPicker backgroundPicker={backgroundPicker} color={color} />
             </ListItemText>

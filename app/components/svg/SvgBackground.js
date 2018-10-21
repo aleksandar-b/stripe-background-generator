@@ -13,13 +13,24 @@ const getStyles = linearGradientBackground => {
   };
 };
 
-const SvgBackground = ({ store, store: { linearGradientBackground, randomGeneratedStripesSvg, circlePosition } }) => {
+const SvgBackground = ({
+  store,
+  store: { linearGradientBackground, randomGeneratedStripesSvg, circlePosition, circlesGroup },
+}) => {
   return (
     <svg style={getStyles(linearGradientBackground)} xmlns="http://www.w3.org/2000/svg" version="1.1">
       <style>
-        {store.circleAnimation &&
+        {circlesGroup.some(({ circleAnimation }) => circleAnimation) &&
           `
         @-webkit-keyframes circle-small-scale {
+          0% {
+            -webkit-transform: scale(1);
+          }
+          100% {
+            -webkit-transform: scale(1.1);
+          }
+        }
+        @-moz-keyframes circle-small-scale {
           0% {
             -webkit-transform: scale(1);
           }
@@ -36,7 +47,8 @@ const SvgBackground = ({ store, store: { linearGradientBackground, randomGenerat
           }
         }
         .puls{
-           WebkitAnimation: circle-small-scale 3s ease-in-out infinite alternate;
+           -webkit-animation: circle-small-scale 3s ease-in-out infinite alternate;
+           -moz-animation: circle-small-scale 3s ease-in-out infinite alternate;
            animation: circle-small-scale 3s ease-in-out infinite alternate;
            animationTimingFunction: cubic-bezier(.6, 0, .4, 1);
            transform-origin: center;
@@ -75,14 +87,17 @@ const SvgBackground = ({ store, store: { linearGradientBackground, randomGenerat
           );
         })}
       </g>
-      <CirclesGroup
-        palette={store.palette}
-        size={store.circleSize}
-        position={store.circlePosition}
-        circles={store.circleQuantity}
-        style={store.circleStyle}
-        circleAnimation={store.circleAnimation}
-      />
+      {circlesGroup.map(group => (
+        <CirclesGroup
+          key={group.id}
+          palette={store.palette}
+          size={group.circleSize}
+          position={group.circlePosition}
+          circles={group.circleQuantity}
+          style={group.circleStyle}
+          circleAnimation={group.circleAnimation}
+        />
+      ))}
     </svg>
   );
 };

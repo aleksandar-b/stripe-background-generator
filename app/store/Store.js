@@ -84,19 +84,16 @@ class Store {
   showCirclesSection = true;
 
   @observable
-  circlePosition = 'center';
-
-  @observable
-  circleSize = 10;
-
-  @observable
-  circleQuantity = 5;
-
-  @observable
-  circleStyle = 'mixed';
-
-  @observable
-  circleAnimation = true;
+  circlesGroup = [
+    {
+      id: Math.random(),
+      circlePosition: 'center',
+      circleSize: 10,
+      circleQuantity: 5,
+      circleStyle: 'mixed',
+      circleAnimation: true,
+    },
+  ];
 
   @observable
   isCopied = false;
@@ -176,11 +173,6 @@ class Store {
   }
 
   @action
-  handleCirclePosition(data) {
-    this.circlePosition = data;
-  }
-
-  @action
   toggleTabs() {
     this.isTabsOpen = !this.isTabsOpen;
   }
@@ -202,23 +194,45 @@ class Store {
   }
 
   @action
-  handleCircleSize(data) {
-    this.circleSize = data;
+  addCircleGroup() {
+    this.circlesGroup.push({
+      id: Math.random(),
+      circlePosition: 'topLeft',
+      circleSize: 5,
+      circleQuantity: 5,
+      circleStyle: 'fill',
+      circleAnimation: true,
+    });
   }
 
   @action
-  handleCircleQuantity(data) {
-    this.circleQuantity = data;
+  deleteCircleGroup(idx) {
+    this.circlesGroup.splice(idx, 1);
   }
 
   @action
-  handleCircleStyle(data) {
-    this.circleStyle = data;
+  handleCirclePosition(data, idx) {
+    this.circlesGroup[idx].circlePosition = data;
   }
 
   @action
-  handleCircleAnimation() {
-    this.circleAnimation = !this.circleAnimation;
+  handleCircleSize(data, idx) {
+    this.circlesGroup[idx].circleSize = data;
+  }
+
+  @action
+  handleCircleQuantity(data, idx) {
+    this.circlesGroup[idx].circleQuantity = data;
+  }
+
+  @action
+  handleCircleStyle(data, idx) {
+    this.circlesGroup[idx].circleStyle = data;
+  }
+
+  @action
+  handleCircleAnimation(data, idx) {
+    this.circlesGroup[idx].circleAnimation = !this.circlesGroup[idx].circleAnimation;
   }
 
   @computed

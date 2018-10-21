@@ -1,6 +1,6 @@
 {
   "name": "stripe-background-generator",
-  "version": "0.0.4",
+  "version": "0.0.7",
   "description": "Background generator.",
   "main": "index.js",
   "scripts": {
