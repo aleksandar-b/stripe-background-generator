@@ -19,7 +19,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
-  "author": "Alex Brajkovic <aspireledd@gmail.com>",
+  "author": "aleksandar-b",
   "license": "MIT",
   "jest": {
     "setupFiles": [
